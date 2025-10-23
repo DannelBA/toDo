@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "E2Plgu1sEaw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\barro\\Documents\\proyectos p\\toGo\\toGo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\barro\\.nuget\\packages\\namotion.reflection\\3.4.2\\namotion.reflection.3.4.2.nupkg.sha512",
+    "C:\\Users\\barro\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\barro\\.nuget\\packages\\njsonschema\\11.4.0\\njsonschema.11.4.0.nupkg.sha512",
+    "C:\\Users\\barro\\.nuget\\packages\\njsonschema.annotations\\11.4.0\\njsonschema.annotations.11.4.0.nupkg.sha512",
+    "C:\\Users\\barro\\.nuget\\packages\\opencli.sources\\0.5.0\\opencli.sources.0.5.0.nupkg.sha512",
+    "C:\\Users\\barro\\.nuget\\packages\\spectre.console\\0.52.0\\spectre.console.0.52.0.nupkg.sha512",
+    "C:\\Users\\barro\\.nuget\\packages\\spectre.console.cli\\0.52.0\\spectre.console.cli.0.52.0.nupkg.sha512"
+  ],
+  "logs": []
+}
