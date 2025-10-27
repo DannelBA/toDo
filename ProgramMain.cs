@@ -10,6 +10,8 @@ namespace main
             VistaConsola vc = new VistaConsola();
 
             vc.cargarArchivos(tc.getPersistenciaTareas);
+
+            tc.persistirTareas(vc.listarTareas(tc.listarTareas()));
         }
     }
 }

@@ -5,7 +5,7 @@ class Tarea
     [JsonInclude]
     public string? titulo { get; set; }
     [JsonInclude]
-    private string? descripccion { get; set; }
+    public string? descripccion { get; set; }
     [JsonInclude]
     public bool marcador { get; set; } = false;
     

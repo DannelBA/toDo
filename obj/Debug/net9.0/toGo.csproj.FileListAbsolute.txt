@@ -30,3 +30,4 @@ C:\Users\barro\Documents\proyectos p\toGo\bin\Debug\net9.0\ru\Spectre.Console.Cl
 C:\Users\barro\Documents\proyectos p\toGo\bin\Debug\net9.0\sv\Spectre.Console.Cli.resources.dll
 C:\Users\barro\Documents\proyectos p\toGo\bin\Debug\net9.0\zh-Hans\Spectre.Console.Cli.resources.dll
 C:\Users\barro\Documents\proyectos p\toGo\obj\Debug\net9.0\toGo.csproj.Up2Date
+C:\Users\barro\Documents\proyectos p\toGo\obj\Debug\net9.0\toGo.sourcelink.json
