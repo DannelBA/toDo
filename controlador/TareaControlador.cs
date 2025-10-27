@@ -37,7 +37,7 @@ class TareaControlador {
 
     public void getPersistenciaTareas()
     {
-        List<Tarea> tareas = pr.deserializer();
+        List<Tarea> tareas = pr.deserializer() ?? new List<Tarea>();
 
         this.tareas = tareas;
 
