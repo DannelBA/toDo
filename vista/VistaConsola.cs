@@ -1,11 +1,33 @@
 using Spectre.Console;
 using System;
+using System.Runtime.InteropServices;
 
 namespace Vista
 {
     class VistaConsola
     {
+
+        
         TareaControlador tc = new TareaControlador();
+
+        // Importar función de Windows
+        [DllImport("Kernel32")]
+        private static extern bool SetConsoleCtrlHandler(ConsoleEventDelegate callback, bool add);
+
+        private delegate bool ConsoleEventDelegate(int eventType);
+
+        private bool handler(int sing)
+        {
+            switch(sing)
+            {
+                case (2):
+                    tc.persistirTareas();
+                    return true;
+                default:
+                    return false;
+            }
+            
+        }
 
         public void crearTarea()
         {
@@ -13,14 +35,14 @@ namespace Vista
             AnsiConsole.Markup("[blue]Crando tarea.[/]\n");
             AnsiConsole.Markup("[steelblue3]Digita el titulo de la tarea: [/]\n");
             string titulo = Console.ReadLine();
-            if(titulo == null)
+            if (titulo == null)
             {
                 AnsiConsole.Markup("[read0]Error al dijitar el titulo.[/]");
                 crearTarea();
             }
             AnsiConsole.Markup("[steelblue3]Digita la descripccion de la tarea: [/]\n");
             string descripccion = Console.ReadLine();
-            
+
             tc.agregarTarea(titulo, descripccion);
 
             listarTareas();
@@ -28,6 +50,7 @@ namespace Vista
         }
         public void listarTareas()
         {
+            SetConsoleCtrlHandler(handler, true);
             List<Tarea> tareas = tc.listarTareas();
             bool execute = true;
 
@@ -53,33 +76,36 @@ namespace Vista
 
                 for (int i = 0; i < tareas.Count; i++)
                 {
-                    if(select == i)
+                    if (select == i)
                     {
-                        if(tareas[i].marcador)
+                        if (tareas[i].marcador)
                         {
-                            AnsiConsole.Markup("\n[skyblue2]"+tareas[i].titulo+"[/]\n[lightskyblue3_1]"+tareas[i].descripccion+"[/] [green]Completada[/]\n");    
-                        }else
-                        {
-                            AnsiConsole.Markup("\n[skyblue2]"+tareas[i].titulo+"[/]\n[lightskyblue3_1]"+tareas[i].descripccion+"[/] [red]No Completada[/]\n");
+                            AnsiConsole.Markup("\n[skyblue2]" + tareas[i].titulo + "[/]\n[lightskyblue3_1]" + tareas[i].descripccion + "[/] [green]Completada[/]\n");
                         }
-                        
-                    }else
+                        else
+                        {
+                            AnsiConsole.Markup("\n[skyblue2]" + tareas[i].titulo + "[/]\n[lightskyblue3_1]" + tareas[i].descripccion + "[/] [red]No Completada[/]\n");
+                        }
+
+                    }
+                    else
                     {
-                        if(tareas[i].marcador)
+                        if (tareas[i].marcador)
                         {
-                            AnsiConsole.Markup("\n"+tareas[i].titulo+"\n"+tareas[i].descripccion+" [green]Completada[/]\n");
-                        }else
-                        {
-                            AnsiConsole.Markup("\n"+tareas[i].titulo+"\n"+tareas[i].descripccion+" [red]No Completada[/]\n");
+                            AnsiConsole.Markup("\n" + tareas[i].titulo + "\n" + tareas[i].descripccion + " [green]Completada[/]\n");
                         }
-                           
+                        else
+                        {
+                            AnsiConsole.Markup("\n" + tareas[i].titulo + "\n" + tareas[i].descripccion + " [red]No Completada[/]\n");
+                        }
+
                     }
                 }
-                
+
                 AnsiConsole.Markup("\n\n\n\nOprime el boton [green]C[/] para crear una nueva tarea.\n");
                 AnsiConsole.Markup("Oprime el boton [green]E[/] para eliminar una tarea.\n");
-                AnsiConsole.Markup("Oprime el boton [green]M[/] para marcar o desmarcar una tarea.\n"); 
-                AnsiConsole.Markup("Oprime el boton [green]S[/] para salir de la aplicación.\n");   
+                AnsiConsole.Markup("Oprime el boton [green]M[/] para marcar o desmarcar una tarea.\n");
+                AnsiConsole.Markup("Oprime el boton [green]S[/] para salir de la aplicación.\n");
 
 
                 key = Console.ReadKey(true).Key;
@@ -87,38 +113,39 @@ namespace Vista
                 {
                     case ConsoleKey.DownArrow:
                         select++;
-                        if(select >= tareas.Count)
+                        if (select >= tareas.Count)
                         {
                             select = 0;
                         }
                         break;
                     case ConsoleKey.UpArrow:
                         select--;
-                        if(select < 0)
+                        if (select < 0)
                         {
-                            select = tareas.Count-1;
+                            select = tareas.Count - 1;
                         }
                         break;
                     case ConsoleKey.C:
                         crearTarea();
-                        break; 
+                        break;
                     case ConsoleKey.E:
-                        select--;
                         tc.eliminarTarea(select);
-                        break; 
+                        select--;
+                        break;
                     case ConsoleKey.S:
                         tc.persistirTareas();
                         execute = false;
                         break;
                     case ConsoleKey.M:
-                        if(!tareas[select].marcador)
+                        if (!tareas[select].marcador)
                         {
-                            tc.marcarTarea(select);    
-                        }else
+                            tc.marcarTarea(select);
+                        }
+                        else
                         {
                             tc.desmarcarTarea(select);
                         }
-                        
+
                         break;
 
                 }
@@ -140,7 +167,7 @@ namespace Vista
                     {
                         Thread.Sleep(10);
                         task1.Value(i);
-                        if (i == 50) { task1.Value(i); tc.getPersistenciaTareas();}
+                        if (i == 50) { task1.Value(i); tc.getPersistenciaTareas(); }
                         ;
                         if (i == 90) { task1.Description("Ya casi esta listo."); task1.Value(i); }
                         ;
