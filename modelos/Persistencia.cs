@@ -10,7 +10,7 @@ class Persistencia {
         File.WriteAllText(namefile, json);
     }
     
-    public List<Tarea>? deserializer() {
+    public List<Tarea> deserializer() {
         string readText = File.ReadAllText(namefile);
         if(readText != null) {
             var tareas = JsonSerializer.Deserialize<List<Tarea>>(readText);

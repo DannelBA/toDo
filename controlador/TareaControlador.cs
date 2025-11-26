@@ -30,7 +30,7 @@ class TareaControlador {
         tareas[i].marcador = false;
     }
 
-    public void persistirTareas(List<Tarea> taeras)
+    public void persistirTareas()
     {
         pr.serializer(tareas);
     }
